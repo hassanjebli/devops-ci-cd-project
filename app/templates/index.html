@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo CRUD</title>
+</head>
+<body>
+    <h1>Liste des tâches</h1>
+
+    <a href="/add">➕ Ajouter une tâche</a>
+
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {{ task.title }}
+                <a href="/edit/{{ task.id }}">✏️</a>
+                <a href="/delete/{{ task.id }}">❌</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
