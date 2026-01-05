@@ -5,7 +5,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t devops-app .'
+                sh 'docker build --no-cache -t crud-app .'
             }
         }
 
@@ -17,7 +17,8 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
-                sh 'docker run -d -p 5001:5000 devops-app || true'
+                sh 'docker rm -f crud-app || true'
+		sh 'docker run -d --name crud-app -p 5001:5000 crud-app'
             }
         }
     }
