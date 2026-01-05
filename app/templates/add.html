@@ -2,15 +2,25 @@
 <html>
 <head>
     <title>Ajouter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Ajouter une tâche</h1>
+<body class="bg-gray-100 min-h-screen flex justify-center items-center">
 
-    <form method="post">
-        <input type="text" name="title" required>
-        <button type="submit">Ajouter</button>
+<div class="bg-white p-6 rounded shadow w-full max-w-md">
+    <h1 class="text-xl font-bold mb-4">➕ Ajouter une tâche</h1>
+
+    <form method="post" class="space-y-4">
+        <input type="text" name="title"
+               class="w-full border p-2 rounded"
+               placeholder="Titre de la tâche" required>
+
+        <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+            Ajouter
+        </button>
     </form>
 
-    <a href="/">⬅ Retour</a>
+    <a href="/" class="block text-center mt-4 text-gray-600 hover:underline">⬅ Retour</a>
+</div>
+
 </body>
 </html>
