@@ -1,0 +1,12 @@
+# environnement virtuel
+venv/
+__pycache__/
+
+# fichiers python compilés
+*.pyc
+
+# base de données
+*.db
+
+# docker
+*.log
