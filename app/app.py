@@ -65,6 +65,10 @@ def delete(id):
     db.close()
     return redirect(url_for("index"))
 
-if __name__ == "__main__":
+# initialiser la base au démarrage de l'app
+with app.app_context():
     init_db()
+
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
