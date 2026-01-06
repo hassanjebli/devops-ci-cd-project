@@ -9,11 +9,23 @@
         <div class="bg-white w-full max-w-xl p-6 rounded-lg shadow">
             <h1 class="text-2xl font-bold mb-4 text-center">📝 Todo List</h1>
 
+            <!-- Statistics Dashboard -->
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Total Tasks</p>
+                        <p class="text-3xl font-bold text-blue-600">{{ task_count }}</p>
+                    </div>
+                    <div class="text-5xl">📊</div>
+                </div>
+            </div>
+
             <a href="/add"
             class="block text-center mb-4 bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
             ➕ Ajouter une tâche
             </a>
 
+            {% if tasks %}
             <ul class="space-y-2">
                 {% for task in tasks %}
                 <li class="flex justify-between items-center bg-gray-50 p-3 rounded shadow-sm">
@@ -25,6 +37,12 @@
                 </li>
                 {% endfor %}
             </ul>
+            {% else %}
+            <div class="text-center text-gray-500 py-8">
+                <p class="text-lg">No tasks yet!</p>
+                <p class="text-sm">Create one to get started 👆</p>
+            </div>
+            {% endif %}
         </div>
 
     </body>
