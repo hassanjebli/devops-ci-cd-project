@@ -4,7 +4,7 @@ WORKDIR /app
 
 ENV PYTHONPATH=/app
 
-COPY app/requirements.txt .
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
