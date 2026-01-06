@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import sqlite3
 import os
 
@@ -28,8 +28,9 @@ def get_db():
 def index():
     db = get_db()
     tasks = db.execute("SELECT * FROM tasks").fetchall()
+    task_count = len(tasks)
     db.close()
-    return render_template("index.html", tasks=tasks)
+    return render_template("index.html", tasks=tasks, task_count=task_count)
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
@@ -64,6 +65,19 @@ def delete(id):
     db.commit()
     db.close()
     return redirect(url_for("index"))
+
+@app.route("/api/stats", methods=["GET"])
+def get_stats():
+    db = get_db()
+    result = db.execute("SELECT COUNT(*) as total FROM tasks").fetchone()
+    db.close()
+    
+    total_tasks = result["total"] if result else 0
+    
+    return jsonify({
+        "total_tasks": total_tasks,
+        "message": f"You have {total_tasks} task(s)"
+    })
 
 # initialiser la base au démarrage de l'app
 with app.app_context():
