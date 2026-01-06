@@ -4,8 +4,12 @@ WORKDIR /app
 
 ENV PYTHONPATH=/app
 
+COPY app/requirements.txt .
+
+RUN pip install -r requirements.txt
+
 COPY . .
 
-RUN pip install flask pytest
+EXPOSE 5000
 
 CMD ["python", "app/app.py"]
