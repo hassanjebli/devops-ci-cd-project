@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Modifier</title>
-</head>
-<body>
-    <h1>Modifier la tâche</h1>
+{% extends "base.html" %}
+{% block title %} · Edit Task{% endblock %}
 
-    <form method="post">
-        <input type="text" name="title" value="{{ task.title }}" required>
-        <button type="submit">Modifier</button>
+{% block content %}
+
+<div class="max-w-md mx-auto bg-white rounded-xl shadow-sm p-6">
+    <h2 class="text-lg font-semibold mb-4">Edit task</h2>
+
+    <form method="post" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium mb-1">Task title</label>
+            <input type="text" name="title"
+                   value="{{ task.title }}"
+                   class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900"
+                   required>
+        </div>
+
+        <button class="w-full bg-slate-900 text-white py-2 rounded-lg hover:bg-slate-800 transition">
+            Update Task
+        </button>
     </form>
 
-    <a href="/">⬅ Retour</a>
-</body>
-</html>
+    <a href="/" class="block text-center mt-4 text-sm text-slate-500 hover:underline">
+        ← Back to dashboard
+    </a>
+</div>
+
+{% endblock %}

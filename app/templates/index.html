@@ -1,51 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Todo CRUD</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-    <body class="bg-gray-100 min-h-screen flex justify-center items-start p-8">
+{% extends "base.html" %}
+{% block title %} · Dashboard{% endblock %}
 
-        <div class="bg-white w-full max-w-xl p-6 rounded-lg shadow">
-            <h1 class="text-2xl font-bold mb-4 text-center">📝 Todo List</h1>
+{% block content %}
 
-            <!-- Statistics Dashboard -->
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-600 text-sm">Total Tasks</p>
-                        <p class="text-3xl font-bold text-blue-600">{{ task_count }}</p>
-                    </div>
-                    <div class="text-5xl">📊</div>
-                </div>
+<!-- Stats -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+    <div class="bg-white rounded-xl shadow-sm p-6">
+        <p class="text-sm text-slate-500">Total Tasks</p>
+        <p class="text-3xl font-semibold mt-2">{{ task_count }}</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm p-6 flex items-center justify-between">
+        <p class="text-sm text-slate-500">Status</p>
+        <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-700">
+            Active
+        </span>
+    </div>
+
+    <a href="/add"
+       class="bg-slate-900 text-white rounded-xl shadow-sm p-6 flex items-center justify-center hover:bg-slate-800 transition">
+        ➕ New Task
+    </a>
+</div>
+
+<!-- Task List -->
+<div class="bg-white rounded-xl shadow-sm">
+    <div class="border-b px-6 py-4 font-medium">
+        Tasks
+    </div>
+
+    {% if tasks %}
+    <ul class="divide-y">
+        {% for task in tasks %}
+        <li class="flex justify-between items-center px-6 py-4 hover:bg-slate-50 transition">
+            <span class="font-medium">{{ task.title }}</span>
+
+            <div class="flex gap-3 text-sm">
+                <a href="/edit/{{ task.id }}"
+                   class="text-slate-500 hover:text-slate-900">Edit</a>
+                <a href="/delete/{{ task.id }}"
+                   class="text-red-500 hover:text-red-700">Delete</a>
             </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="text-center py-12 text-slate-500">
+        <p class="text-lg font-medium">No tasks yet</p>
+        <p class="text-sm">Create your first task to get started</p>
+    </div>
+    {% endif %}
+</div>
 
-            <a href="/add"
-            class="block text-center mb-4 bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-            ➕ Ajouter une tâche
-            </a>
-
-            {% if tasks %}
-            <ul class="space-y-2">
-                {% for task in tasks %}
-                <li class="flex justify-between items-center bg-gray-50 p-3 rounded shadow-sm">
-                    <span>{{ task.title }}</span>
-                    <div class="space-x-2">
-                        <a href="/edit/{{ task.id }}" class="text-yellow-600 hover:underline">✏️</a>
-                        <a href="/delete/{{ task.id }}" class="text-red-600 hover:underline">❌</a>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <div class="text-center text-gray-500 py-8">
-                <p class="text-lg">No tasks yet!</p>
-                <p class="text-sm">Create one to get started 👆</p>
-            </div>
-            {% endif %}
-        </div>
-
-    </body>
-
-</html>
-
+{% endblock %}

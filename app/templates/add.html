@@ -1,26 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Ajouter</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen flex justify-center items-center">
+{% extends "base.html" %}
+{% block title %} · New Task{% endblock %}
 
-<div class="bg-white p-6 rounded shadow w-full max-w-md">
-    <h1 class="text-xl font-bold mb-4">➕ Ajouter une tâche</h1>
+{% block content %}
+
+<div class="max-w-md mx-auto bg-white rounded-xl shadow-sm p-6">
+    <h2 class="text-lg font-semibold mb-4">Create a new task</h2>
 
     <form method="post" class="space-y-4">
-        <input type="text" name="title"
-               class="w-full border p-2 rounded"
-               placeholder="Titre de la tâche" required>
+        <div>
+            <label class="block text-sm font-medium mb-1">Task title</label>
+            <input type="text" name="title"
+                   class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900"
+                   placeholder="e.g. Finish project report"
+                   required>
+        </div>
 
-        <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-            Ajouter
+        <button class="w-full bg-slate-900 text-white py-2 rounded-lg hover:bg-slate-800 transition">
+            Save Task
         </button>
     </form>
 
-    <a href="/" class="block text-center mt-4 text-gray-600 hover:underline">⬅ Retour</a>
+    <a href="/" class="block text-center mt-4 text-sm text-slate-500 hover:underline">
+        ← Back to dashboard
+    </a>
 </div>
 
-</body>
-</html>
+{% endblock %}

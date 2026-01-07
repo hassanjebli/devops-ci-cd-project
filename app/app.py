@@ -3,7 +3,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-
+app.config["BASE_TITLE"] = "Tasks Crud"
 DB_PATH = "app/database.db"
 
 def init_db():
@@ -30,7 +30,7 @@ def index():
     tasks = db.execute("SELECT * FROM tasks").fetchall()
     task_count = len(tasks)
     db.close()
-    return render_template("index.html", tasks=tasks, task_count=task_count)
+    return render_template("index.html", tasks=tasks, task_count=task_count,base_title=app.config["BASE_TITLE"])
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
